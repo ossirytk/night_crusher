@@ -5,10 +5,16 @@ with {
     // Noise component with gain and cutoff
     // TODO same for an oscillator
 
-    ct_freq = hslider("cutoffFrequency",250,50,500,0.01);
-    q_amount = hslider("q",5,1,10,0.1);
-    gain_vol = hslider("gain",0.2,0,0.5,0.01);
-    nice_noise(ctFreq,q,gain) = no.noise : fi.resonlp(ctFreq,q,gain);
+    //ct_freq = hslider("cutoffFrequency",250,50,500,0.01);
+    //q_amount = hslider("q",5,1,10,0.1);
+    //gain_vol = hslider("gain",0.2,0,0.5,0.01);
+    nice_noise(ctFreq,q,gain) = no.noise : fi.resonlp(ctFreq,q,gain)
+    with {
+        n_col(x) = vgroup("NOISE nice_noice [tooltip: Noice tooltip]", x);
+        ct_freq = n_col(hslider("[0] cutoffFrequency",250,50,500,0.01));
+        q_amount = n_col(hslider("[1] q",5,1,10,0.1));
+        gain_vol = n_col(hslider("[2] gain",0.2,0,0.5,0.01));
+    };
     
     // Drums with bitcrush
     // TODO might need to change the values for an actual audio signal
